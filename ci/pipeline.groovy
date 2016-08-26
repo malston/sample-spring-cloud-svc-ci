@@ -21,7 +21,9 @@ def clean_test() {
 
 def sonar(url) {
   try {
-      sh "./gradlew sonarqube -Dsonar.host.url=${url} -Dsonar.verbose=true"
+      if (url != "") {
+        sh "./gradlew sonarqube -Dsonar.host.url=${url} -Dsonar.verbose=true"
+      }
   } catch (Error _) {
       echo 'Sonar is not running -- check docker compose file'
   }
@@ -29,12 +31,12 @@ def sonar(url) {
 
 def push(api, user, password, org, space, domain, hostname) {
     sh "ls -la"
-    sh "./gradlew --full-stacktrace --no-daemon cf-push -Pcf.ccHost=${api} -Pcf.ccUser=${user} -Pcf.ccPassword=${password} -Pcf.org=${org} -Pcf.space=${space} -Pcf.domain=${domain} -Pcf.hostName=${hostname}"
+    sh "./gradlew --full-stacktrace --no-daemon cf-push-autopilot -Pcf.ccHost=${api} -Pcf.ccUser=${user} -Pcf.ccPassword=${password} -Pcf.org=${org} -Pcf.space=${space} -Pcf.domain=${domain} -Pcf.hostName=${hostname}"
 }
 
 def pushIf(api, user, password, org, space, domain, hostname) {
     input "Deploy to ${org} ${space}?"
-    sh "./gradlew --full-stacktrace --no-daemon cf-push -Pcf.ccHost=${api} -Pcf.ccUser=${user} -Pcf.ccPassword=${password} -Pcf.org=${org} -Pcf.space=${space} -Pcf.domain=${domain} -Pcf.hostName=${hostname}"
+    sh "./gradlew --full-stacktrace --no-daemon cf-push-autopilot -Pcf.ccHost=${api} -Pcf.ccUser=${user} -Pcf.ccPassword=${password} -Pcf.org=${org} -Pcf.space=${space} -Pcf.domain=${domain} -Pcf.hostName=${hostname}"
 }
 
 def runSmokeTests(api, user, password, org, space, domain, hostname) {

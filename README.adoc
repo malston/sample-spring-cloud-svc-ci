@@ -36,7 +36,7 @@ a temporary admin password will be printed to the console, use it to login to
 the console
 ===============================
 
- - Install the Pipeline Jenkins Plugin, "Jobs DSL Plugin" along with the other recommended plugins
+ - Install the Pipeline Jenkins Plugin
 
  - Download Jenkins CLI from the Jenkins server:
 
