@@ -23,7 +23,7 @@ Switch to one of the following branches to checkout the respective pipeline:
  - Run the following command:
 [source]
 ----
-docker run -p 8080:8080 -p 50000:50000 jenkins:2.3
+docker run -p 8080:8080 -p 50000:50000 jenkins:2.9.14
 ----
 
  - Navigate to http://dockerip:8080/
